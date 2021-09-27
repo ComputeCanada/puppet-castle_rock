@@ -1,4 +1,5 @@
 class profile::base (
+  String $domain_name,
   Optional[String] $admin_email = undef,
 ) {
   include stdlib
@@ -26,12 +27,12 @@ class profile::base (
   }
 
   if $admin_email {
-    include profile::mail::server
     file { '/opt/puppetlabs/bin/postrun':
       ensure  => present,
       mode    => '0700',
       content => epp('profile/base/postrun', {
-        'email' => $admin_email,
+        'email'  => $admin_email,
+        'domain' => $domain_name,
       }),
     }
   }

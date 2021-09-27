@@ -346,7 +346,6 @@ class profile::slurm::controller (
   String $selinux_context = 'user_u:user_r:user_t:s0',
 ) {
   contain profile::slurm::base
-  include profile::mail::server
 
   file { '/usr/sbin/slurm_mail':
     ensure => 'present',
