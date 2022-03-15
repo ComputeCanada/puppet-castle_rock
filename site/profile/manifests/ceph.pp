@@ -31,12 +31,19 @@ class profile::ceph::client(
       ensure  => directory,
       require => Class['profile::ceph::client::config']
     }
+    file { "/${mount}":
+      ensure  => directory,
+      require => Class['profile::ceph::client::config']
+    }
     mount { "/${mount}":
       ensure  => 'mounted',
       fstype  => 'none',
       options => 'rw,bind',
       device  => "/mnt/${mount_name}/${mount}",
-      require => File["/mnt/${mount_name}/${mount}"]
+      require => [
+        File["/mnt/${mount_name}/${mount}"],
+        File["/${mount}"],
+      ],
     }
   }
 }
