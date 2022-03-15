@@ -6,7 +6,7 @@ class profile::ceph::client(
   Array[String] $mount_binds = [],
   String $mount_name = 'cephfs01',
 ) {
-  class { 'profile::ceph::client::install':
+  class { 'profile::ceph::client::config':
     share_name  => $share_name,
     access_key  => $access_key,
     export_path => $export_path,
@@ -23,13 +23,13 @@ class profile::ceph::client(
     fstype  => 'ceph',
     device  => "${mon_host_string}:${export_path}",
     options => "name=${share_name},secretfile=/etc/ceph/client.keyonly.${share_name}",
-    require => Class['profile::ceph::client::install']
+    require => Class['profile::ceph::client::config']
   }
 
   $mount_binds.each |$mount| {
     file { "/mnt/${mount_name}/${mount}":
       ensure  => directory,
-      require => Class['profile::ceph::client::install']
+      require => Class['profile::ceph::client::config']
     }
     mount { "/${mount}":
       ensure  => 'mounted',
@@ -40,12 +40,7 @@ class profile::ceph::client(
   }
 }
 
-class profile::ceph::client::install(
-  String $share_name,
-  String $access_key,
-  String $export_path,
-  Array[String] $mon_host,
-) {
+class profile::ceph::client::install {
 
   yumrepo { 'ceph-stable':
     ensure        => present,
@@ -66,6 +61,15 @@ class profile::ceph::client::install(
     ensure  => installed,
     require => [Yumrepo['epel'], Yumrepo['ceph-stable']]
   }
+}
+
+class profile::ceph::client::config(
+  String $share_name,
+  String $access_key,
+  String $export_path,
+  Array[String] $mon_host,
+) {
+  require profile::ceph::client::install
 
   file { "/etc/ceph/client.fullkey.${share_name}":
     ensure  => present,
@@ -95,5 +99,4 @@ key = ${access_key}
     mon host = ${mon_host_string}
 |EOT
   }
-
 }
