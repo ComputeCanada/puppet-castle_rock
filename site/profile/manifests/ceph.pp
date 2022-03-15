@@ -2,8 +2,8 @@ class profile::ceph::client(
   String $share_name,
   String $access_key,
   String $export_path,
-  List[String] $mon_host,
-  List[String] $mount_binds = [],
+  Array[String] $mon_host,
+  Array[String] $mount_binds = [],
   String $mount_name = 'cephfs01',
 ) {
   class { 'profile::ceph::client::install':
