@@ -29,12 +29,9 @@ node default {
     include profile::squid::server
     include profile::slurm::controller
 
-    include profile::freeipa::mokey
     include profile::slurm::accounting
     include profile::workshop::mgmt
 
-    include profile::accounts
-    include profile::users::ldap
   } else {
     include profile::freeipa::client
     include profile::sssd::client
@@ -48,12 +45,6 @@ node default {
     include profile::jupyterhub::node
 
     include profile::slurm::node
-  }
-
-  if 'nfs' in $instance_tags {
-    include profile::nfs::server
-  } else {
-    include profile::nfs::client
   }
 
   if 'proxy' in $instance_tags {
