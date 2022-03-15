@@ -51,11 +51,17 @@ class profile::ceph::client::install {
     repo_gpgcheck => 0,
   }
 
+  if ($::facts['os']['release']['major'] == '8') {
+    $argparse_pkgname = 'python3-ceph-argparse'
+  } else {
+    $argparse_pkgname = 'python-ceph-argparse'
+  }
+
   package { [
     'libcephfs2',
     'python-cephfs',
     'ceph-common',
-    'python-ceph-argparse',
+    $argparse_pkgname,
 #    'ceph-fuse',
   ] :
     ensure  => installed,
