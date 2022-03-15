@@ -11,7 +11,6 @@ class profile::ceph::client(
     access_key  => $access_key,
     export_path => $export_path,
     mon_host    => $mon_host,
-    mount_name  => $mount_name,
   }
 
   file { "/mnt/${mount_name}":
