@@ -5,6 +5,7 @@ class profile::ceph::client(
   Array[String] $mon_host,
   Array[String] $mount_binds = [],
   String $mount_name = 'cephfs01',
+  String $binds_fcontext_equivalence = '/home',
 ) {
   class { 'profile::ceph::client::config':
     share_name  => $share_name,
@@ -44,6 +45,16 @@ class profile::ceph::client(
         File["/mnt/${mount_name}/${mount}"],
         File["/${mount}"],
       ],
+    }
+
+    if ($binds_fcontext_equivalence != '') {
+      selinux::fcontext::equivalence { "/${mount}":
+        ensure  => 'present',
+        target  => $binds_fcontext_equivalence,
+        require => Mount["/${mount}"],
+        notify  => Selinux::Exec_restorecon["/${mount}"]
+      }
+      selinux::exec_restorecon { "/${mount}": }
     }
   }
 }
