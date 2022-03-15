@@ -8,7 +8,7 @@ class profile::ceph::client(
 ) {
   class { 'profile::ceph::client::install':
     share_name  => $share_name,
-    access_key  => Sensitive($access_key),
+    access_key  => $access_key,
     export_path => $export_path,
     mon_host    => $mon_host,
     mount_name  => $mount_name,
