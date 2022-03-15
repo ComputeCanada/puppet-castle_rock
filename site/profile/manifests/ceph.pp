@@ -45,7 +45,7 @@ class profile::ceph::client::install(
   String $share_name,
   String $access_key,
   String $export_path,
-  List[String] $mon_host,
+  Array[String] $mon_host,
 ) {
 
   yumrepo { 'ceph-stable':
