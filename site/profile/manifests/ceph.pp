@@ -33,7 +33,8 @@ class profile::ceph::client(
     }
     mount { "/${mount}":
       ensure  => 'mounted',
-      fstype  => 'bind',
+      fstype  => 'none',
+      options => 'rw,bind',
       device  => "/mnt/${mount_name}/${mount}",
       require => File["/mnt/${mount_name}/${mount}"]
     }
