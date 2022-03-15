@@ -47,7 +47,7 @@ class profile::ceph::client(
       ],
     }
 
-    if ($binds_fcontext_equivalence != '') {
+    if ($binds_fcontext_equivalence != '' and $mount != $binds_fcontext_equivalence) {
       selinux::fcontext::equivalence { "/${mount}":
         ensure  => 'present',
         target  => $binds_fcontext_equivalence,
