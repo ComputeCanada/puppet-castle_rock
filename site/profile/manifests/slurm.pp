@@ -188,7 +188,6 @@ END
         'cluster_name'          => $cluster_name,
         'slurm_version'         => $slurm_version,
         'enable_x11_forwarding' => $enable_x11_forwarding,
-        'mem_spec_limit'        => $os_reserved_memory,
       }),
     group   => 'slurm',
     owner   => 'slurm',
@@ -449,9 +448,10 @@ class profile::slurm::node {
     require => Tcp_conn_validator['consul'],
     token   => lookup('profile::consul::acl_api_token'),
     meta    => {
-      cpus       => String($facts['processors']['count']),
-      realmemory => String($real_memory),
-      gpus       => String($facts['nvidia_gpu_count']),
+      cpus         => String($facts['processors']['count']),
+      realmemory   => String($real_memory),
+      gpus         => String($facts['nvidia_gpu_count']),
+      memspeclimit => String($mem_spec_limit),
     },
   }
 
