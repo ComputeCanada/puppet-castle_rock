@@ -12,7 +12,6 @@ SelectType=select/cons_tres
 SelectTypeParameters=CR_Core_Memory
 
 # NODE CONFIGURATIONS
-MemSpecLimit=<%= $mem_spec_limit %>
 GresTypes=gpu
 {{ if service "slurmd" -}}
 include /etc/slurm/node.conf
