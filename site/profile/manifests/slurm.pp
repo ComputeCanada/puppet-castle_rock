@@ -443,6 +443,7 @@ class profile::slurm::node {
   }
 
   $real_memory = $facts['memory']['system']['total_bytes'] / (1024 * 1024)
+  $os_reserved_memory = lookup('profile::slurm::base::os_reserved_memory')
   consul::service { 'slurmd':
     port    => 6818,
     require => Tcp_conn_validator['consul'],
@@ -451,7 +452,7 @@ class profile::slurm::node {
       cpus         => String($facts['processors']['count']),
       realmemory   => String($real_memory),
       gpus         => String($facts['nvidia_gpu_count']),
-      memspeclimit => String($mem_spec_limit),
+      memspeclimit => String($os_reserved_memory),
     },
   }
 
