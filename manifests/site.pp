@@ -38,6 +38,7 @@ node default {
     include profile::sssd::client
     include profile::rsyslog::client
     include profile::nfs::client
+    include profile::ceph::client
   }
 
   if 'node' in $instance_tags {
