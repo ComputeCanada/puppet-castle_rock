@@ -27,6 +27,7 @@ node default {
     include profile::metrics::server
     include profile::rsyslog::server
     include profile::squid::server
+    include profile::nfs::server
     include profile::slurm::controller
 
     include profile::slurm::accounting
@@ -36,6 +37,7 @@ node default {
     include profile::freeipa::client
     include profile::sssd::client
     include profile::rsyslog::client
+    include profile::nfs::client
   }
 
   if 'node' in $instance_tags {
