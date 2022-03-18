@@ -225,6 +225,7 @@ END
 # @param dbd_port Specfies the port on which run the slurmdbd daemon.
 class profile::slurm::accounting(
   String $password,
+  Hash[String, Any] $options = {},
   Array[String] $admins = [],
   Hash[String, Hash] $accounts = {},
   Hash[String, Array[String]] $users = {},
@@ -297,10 +298,11 @@ class profile::slurm::accounting(
   file { '/etc/slurm/sacct.cfg':
     ensure  => present,
     content => epp('profile/slurm/sacct.cfg', {
-      cluster  => $cluster_name,
-      admins   => $admins,
-      accounts => $accounts,
-      users    => $users
+      cluster         => $cluster_name,
+      cluster_options => $options
+      admins          => $admins,
+      accounts        => $accounts,
+      users           => $users
     }),
     notify  => Exec['load_sacct_cfg']
   }
