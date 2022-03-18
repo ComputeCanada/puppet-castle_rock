@@ -1,5 +1,5 @@
 #
-Cluster - '<%= $cluster_name %>':<%= join($cluster_options.map|$key, $value| { "${key}=${value}" },  ':')%>
+Cluster - '<%= $cluster %>':<%= join($cluster_options.map|$key, $value| { "${key}=${value}" },  ':')%>
 Parent - root
 User - root:AdminLevel=Administrator
 <% $admins.each |$username| { %>
