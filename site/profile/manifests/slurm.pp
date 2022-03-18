@@ -299,7 +299,7 @@ class profile::slurm::accounting(
     ensure  => present,
     content => epp('profile/slurm/sacct.cfg', {
       cluster         => $cluster_name,
-      cluster_options => $options
+      cluster_options => $options,
       admins          => $admins,
       accounts        => $accounts,
       users           => $users
