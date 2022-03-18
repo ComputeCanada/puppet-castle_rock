@@ -1,14 +1,16 @@
 class profile::sssd::client(
-  Hash $domains
+  Hash $domains,
+  Boolean $deny_access = false,
 ){
-  require profile::freeipa::client
-
   package { 'sssd-ldap': }
 
-  $domain_name = lookup('profile::freeipa::base::domain_name')
-  $ipa_domain = "int.${domain_name}"
-
-
+  if $deny_access {
+    $extra_config = {
+      'access_provider' => 'deny'
+    }
+  } else {
+    $extra_config = {}
+  }
 
   $domains.map | $domain, $config | {
     file { "/etc/sssd/conf.d/${domain}.conf":
@@ -18,7 +20,7 @@ class profile::sssd::client(
       mode    => '0600',
       content =>  epp('profile/sssd/sssd.conf', {
         'domain' => $domain,
-        'config' => $config,
+        'config' => $config + extra_config,
       }),
       seltype => 'sssd_conf_t',
       notify  => Service['sssd']
@@ -46,11 +48,12 @@ EOT
 
   $domain_list = join([$ipa_domain] + keys($domains), ',')
   file_line { '/etc/sssd/sssd.conf':
-    ensure => present,
-    path   => '/etc/sssd/sssd.conf',
-    line   => "domains = ${domain_list}",
-    match  => "^domains = ${$ipa_domain}$",
-    notify => Service['sssd'],
+    ensure  => present,
+    path    => '/etc/sssd/sssd.conf',
+    line    => "domains = ${domain_list}",
+    match   => "^domains = ${$ipa_domain}$",
+    notify  => Service['sssd'],
+    require => Exec['ipa-install'],
   }
 
   service { 'sssd':
