@@ -304,7 +304,7 @@ class profile::slurm::accounting(
       accounts        => $accounts,
       users           => $users
     }),
-    notify  => Exec['load_sacct_cfg']
+    notify  => Exec['sacctmgr_load_cfg']
   }
 
   exec { 'sacctmgr_load_cfg':
