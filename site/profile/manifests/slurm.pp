@@ -308,7 +308,7 @@ class profile::slurm::accounting(
   }
 
   exec { 'sacctmgr_load_cfg':
-    command     => 'sacctmgr load file=/etc/slurm/sacct.cfg',
+    command     => 'sacctmgr load file=/etc/slurm/sacct.cfg -i',
     path        => ['/bin', '/usr/sbin', '/opt/software/slurm/bin', '/opt/software/slurm/sbin'],
     refreshonly => true,
     tries       => 4,
