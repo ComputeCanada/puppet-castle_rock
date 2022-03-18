@@ -2,9 +2,9 @@
 Cluster - '<%= $cluster %>':<%= join($cluster_options.map|$key, $value| { "${key}=${value}" },  ':')%>
 Parent - root
 User - root:AdminLevel=Administrator
-<% $admins.each |$username| { %>
+<% $admins.each |$username| { -%>
 User - <%= $username %>:AdminLevel=Administrator
-<% } %>
+<% } -%>
 
 <% $accounts.each |$key, $values| { -%>
 Account - <%= $key %>:<%= join($values.map|$key, $value| { "${key}=${value}" },  ':')%>
