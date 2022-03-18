@@ -12,6 +12,6 @@ Account - <%= $key %>:<%= join($values.map|$key, $value| { "${key}=${value}" }, 
 <% $users.each |$user, $accounts| { -%>
 <% $accounts.each |$index, $account| { -%>
 Parent - <%= $account %>
-User - <%= $user %><% if $index == 0 { %>:DefaultAccount<%= $account %><% } %>
+User - <%= $user %><% if $index == 0 { %>:DefaultAccount=<%= $account %><% } %>
 <% } -%>
 <% } -%>
