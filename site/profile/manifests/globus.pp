@@ -11,7 +11,8 @@ class profile::globus::base (String $globus_user = '', String $globus_password =
   if ($globus_user != '') and ($globus_password != '') {
     package { 'globus-connect-server':
       ensure  => 'installed',
-      require => [Package['globus-connect-server-repo']]
+      require => [Package['yum-plugin-priorities'],
+                  Package['globus-connect-server-repo']]
     }
 
     apache::vhost { "dtn.${domain_name}":
