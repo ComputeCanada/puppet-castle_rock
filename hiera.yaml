@@ -12,6 +12,8 @@ hierarchy:
     path: "user_data.yaml"
   - name: "Terraform data"
     path: "terraform_data.yaml"
+  - name: "Secrets"
+    path: "secrets.yaml"
   - name: "Software stack"
     path: "software_stack/%{facts.software_stack}.yaml"
   - name: "Cloud provider"
