@@ -18,14 +18,14 @@ mkdir ${USER_HOME}
 rsync -opg -r -u --chown=$USERNAME:$USERNAME --chmod=D700,F700 /etc/skel/ ${USER_HOME}
 restorecon -F -R ${USER_HOME}
 
-USER_SCRATCH="/scratch/${USERNAME}"
+# USER_SCRATCH="/scratch/${USERNAME}"
 
-mkdir -p ${USER_SCRATCH}
-ln -sfT ${USER_SCRATCH} "${USER_HOME}/scratch"
-chown -h ${USERNAME}:${USERNAME} "${USER_HOME}/scratch"
-chown -h ${USERNAME}:${USERNAME} ${USER_SCRATCH}
-chmod 750 ${USER_SCRATCH}
-restorecon -F -R ${USER_SCRATCH}
+# mkdir -p ${USER_SCRATCH}
+# ln -sfT ${USER_SCRATCH} "${USER_HOME}/scratch"
+# chown -h ${USERNAME}:${USERNAME} "${USER_HOME}/scratch"
+# chown -h ${USERNAME}:${USERNAME} ${USER_SCRATCH}
+# chmod 750 ${USER_SCRATCH}
+# restorecon -F -R ${USER_SCRATCH}
 
 for GROUP in $(id -Gn $USERNAME); do
     if [[ "$GROUP" =~ ^(ctb|def|rpp|rrg)-[a-z0-9_-]*$ ]]; then

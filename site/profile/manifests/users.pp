@@ -12,6 +12,15 @@ class profile::users::ldap (
   ensure_resources(profile::users::ldap_user, $users, { 'access_tags' => $access_tags })
 }
 
+class profile::users::external_ldap ( ) {
+
+  file { '/sbin/create_user_folders.py':
+    source => 'puppet:///modules/profile/users/create_user_folders.sh',
+    mode   => '0755',
+  }
+
+}
+
 class profile::users::local (
   Hash $users
 ) {
