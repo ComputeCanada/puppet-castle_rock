@@ -14,7 +14,7 @@ class profile::users::ldap (
 
 class profile::users::external_ldap ( ) {
 
-  file { '/sbin/create_user_folders.py':
+  file { '/sbin/create_user_folders.sh':
     source => 'puppet:///modules/profile/users/create_user_folders.sh',
     mode   => '0755',
   }
