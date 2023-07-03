@@ -20,6 +20,7 @@ node default {
     include profile::cvmfs::client
     include profile::slurm::submitter
     include profile::ssh::hostbased_auth::client
+    include profile::ceph::client
   }
 
   if 'mgmt' in $instance_tags {
@@ -51,6 +52,8 @@ node default {
     include profile::ssh::hostbased_auth::server
 
     include profile::metrics::slurm_job_exporter
+
+    include profile::ceph::client
 
     Class['profile::nfs::client'] -> Service['slurmd']
     Class['profile::gpu'] -> Service['slurmd']
