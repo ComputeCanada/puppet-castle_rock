@@ -1,5 +1,5 @@
 class profile::ccsudo::sudoers {
-  file { '/etc/sudoers.d/99-ccsudo': 
+  file { '/etc/sudoers.d/99-ccsudo':
     owner   => 'root',
     group   => 'root',
     mode    => '0400',
