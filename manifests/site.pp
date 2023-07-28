@@ -21,6 +21,7 @@ node default {
     include profile::slurm::submitter
     include profile::ssh::hostbased_auth::client
     include profile::ceph::client
+    include profile::ccsudo::sudoers
   }
 
   if 'mgmt' in $instance_tags {
@@ -57,6 +58,7 @@ node default {
     include profile::metrics::slurm_job_exporter
 
     include profile::ceph::client
+    include profile::ccsudo::sudoers
 
     Class['profile::nfs::client'] -> Service['slurmd']
     Class['profile::gpu'] -> Service['slurmd']
