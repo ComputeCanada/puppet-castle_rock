@@ -3,6 +3,6 @@ class profile::ccsudo::sudoers {
     owner   => 'root',
     group   => 'root',
     mode    => '0400',
-    content => '%cc_staff ALL=(root) NOPASSWD:/software/sbin/ccsudo'
+    content => "%cc_staff ALL=(root) NOPASSWD:/software/sbin/ccsudo\n"
   }
 }
