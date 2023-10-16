@@ -1,4 +1,4 @@
-class profile::localscratch::ephemeraldisk {  
+class profile::localscratch::ephemeraldisk {
     mount { '/localscratch':
       ensure  => 'mounted',
       fstype  => 'none',
