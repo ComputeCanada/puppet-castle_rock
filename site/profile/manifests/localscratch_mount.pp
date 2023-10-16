@@ -1,12 +1,12 @@
 class profile::localscratch::ephemeraldisk {  
-    mount { /localscratch:
+    mount { '/localscratch':
       ensure  => 'mounted',
       fstype  => 'none',
       options => 'rw,bind',
-      device  => "/mnt",
+      device  => '/mnt',
       require => [
-        File["/mnt"],
-        File["/localscratch"],
+        File['/mnt'],
+        File['/localscratch'],
       ],
     }
 }
