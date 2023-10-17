@@ -22,7 +22,6 @@ node default {
     include profile::ssh::hostbased_auth::client
     include profile::ceph::client
     include profile::ccsudo::sudoers
-    include profile::localscratch::ephemeraldisk
   }
 
   if 'mgmt' in $instance_tags {
