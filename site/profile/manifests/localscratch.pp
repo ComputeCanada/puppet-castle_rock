@@ -5,7 +5,6 @@ class profile::localscratch::ephemeraldisk {
       options => 'rw,bind',
       device  => '/mnt',
       require => [
-        File['/mnt'],
         File['/localscratch'],
       ],
     }
