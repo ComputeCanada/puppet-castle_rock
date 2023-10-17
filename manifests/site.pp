@@ -59,6 +59,7 @@ node default {
 
     include profile::ceph::client
     include profile::ccsudo::sudoers
+    include profile::localscratch::ephemeraldisk
 
     Class['profile::nfs::client'] -> Service['slurmd']
     Class['profile::gpu'] -> Service['slurmd']
