@@ -31,7 +31,7 @@ class profile::cvmfs::client (
     package { 'cc-cvmfs-repo':
       ensure   => 'installed',
       provider => 'rpm',
-      name     => 'computecanada-release-1.0-1.noarch',
+      name     => 'computecanada-release-2.0-1.noarch',
       source   => 'https://package.computecanada.ca/yum/cc-cvmfs-public/prod/RPM/computecanada-release-latest.noarch.rpm',
     }
 
